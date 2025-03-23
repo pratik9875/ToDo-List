@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        /* Basic styling for the to-do list */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #input {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        ol {
+            margin-top: 20px;
+        }
+        li {
+            padding: 10px;
+            font-size: 18px;
+            border: 1px solid #ddd;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        li button {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        li button:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <input id="input" type="text" placeholder="Enter a new task">
+    <button onclick="addTask()">Add</button>
+    <ol id="list">
+        <!-- Tasks will be listed here -->
+    </ol>
+
+    <script>
+        const input = document.getElementById('input');
+        const list = document.getElementById('list');
+        let taskCount = 0;
+
+        function addTask() {
+            if (input.value.trim() === '') {
+                alert('Please enter a task.');
+                return;
+            }
+            const newLi = document.createElement('li');
+            newLi.id = 'task-' + ++taskCount;
+            newLi.innerHTML = `${input.value} <button onclick="deleteTask(event)">Delete</button>`;
+            list.appendChild(newLi);
+            input.value = '';
+        }
+
+        function deleteTask(event) {
+            const taskItem = event.target.parentElement;
+            list.removeChild(taskItem);
+        }
+    </script>
+</body>
+</html>
